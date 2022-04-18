@@ -1,0 +1,53 @@
+/* .drt{
+  background-color: white;
+}
+.drt h1{
+  padding: 2%;
+}
+
+.App {
+  padding-top: 3%;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    
+  /* } */
+    
+  /* table {
+    border: 2px solid rgb(8, 10, 9);
+    width: 1100px;
+    height: 200px;
+  }
+    
+  thead {
+    border: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+    
+  th {
+      
+      padding: auto;
+    text-align: center;
+    
+  } */
+  /* td{
+    padding: 3%;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
+  }
+
+  th{
+    padding: 3%;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+  } */
+
+  /* table, th, td {
+    padding: 3%;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-collapse: collapse;
+  } */
