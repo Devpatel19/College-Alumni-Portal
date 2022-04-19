@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -26,15 +26,18 @@ import SchoolIcon from "@mui/icons-material/School";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo.type === "Admin") {
       dispatch(dashboardDetail());
+    } else {
+      console.log("gdsad");
+      navigate("/HomeScreen/login");
     }
-  }, [userInfo, dispatch]);
+  }, [userInfo, dispatch, navigate]);
 
   const DashboardDetail = useSelector((state) => state.DashboardDetail);
   const { loading, DetailDashboard } = DashboardDetail;

@@ -23,16 +23,10 @@ const AdminScrren = () => {
   const { userInfo } = userLogin;
 
   const navigate = useNavigate();
+
   useEffect(() => {
     navigate("/login/Admin/Dashboard");
   }, []);
-
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/login");
-    }
-  }, [userInfo]);
-  const cards = [1, 2, 3, 4];
 
   return (
     <div style={styles.contentDiv}>

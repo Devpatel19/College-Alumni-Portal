@@ -10,7 +10,6 @@ const profileSchema = new mongoose.Schema(
     },
     Education: {
       type: String,
-      required: true,
       trim: true,
     },
     Image: {

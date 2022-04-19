@@ -5,6 +5,7 @@ import Loader from "../Components/Loader";
 import { login } from "../Actions/userAction";
 import err from "../Screen-css/errors.module.css";
 import validateL from "../Components/validateL";
+import validator from "validator";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -22,23 +23,49 @@ import LoginIcon from "@mui/icons-material/Login";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const theme = createTheme();
 
 const SignInSide = () => {
-  const [type, setType] = useState("");
   const [message, setMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [news, setNew] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+  const [type, setType] = useState("");
+
+  const handlechange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    if (name === "email") {
+      if (!validator.isEmail(value)) {
+        setMessage("Email address is invalid");
+      } else {
+        setMessage("");
+      }
+    } else if (name === "password") {
+      if (value.length < 6) {
+        setPassword("Password needs to be 6 characters or more");
+      } else {
+        setPassword("");
+      }
+    } else {
+      setType(value);
+      setNew("");
+    }
+  };
+
   useEffect(() => {
     if (userInfo) {
       navigate(`/login/${type}`);
     }
   }, [userInfo, navigate, type]);
-
+  const [open, setOpen] = useState(true);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -48,11 +75,18 @@ const SignInSide = () => {
     const mess = validateL(values);
 
     if (Object.keys(mess).length !== 0) {
-      setMessage(mess);
+      setNew(mess);
     } else {
-      setMessage("");
+      setNew("");
       dispatch(login(values));
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
   return (
     <ThemeProvider theme={theme}>
@@ -78,7 +112,14 @@ const SignInSide = () => {
             noValidate
             sx={{ mt: 1 }}
           >
-            {error && <p className={err.error}>{error}</p>}
+            {error && (
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                message={error}
+                onClose={handleClose}
+              />
+            )}
             {loading && <Loader />}
             <br />
             <FormControl fullWidth>
@@ -86,12 +127,12 @@ const SignInSide = () => {
                 Types of login
               </InputLabel>
               <Select
-                onChange={(e) => setType(e.target.value)}
+                onChange={handlechange}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Types of login"
-                error={!!message.type}
-                helperText={message.type}
+                error={!!news}
+                helperText={news}
               >
                 <MenuItem value="Admin">Admin</MenuItem>
                 <MenuItem value="Alumni">Alumni</MenuItem>
@@ -108,8 +149,9 @@ const SignInSide = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                error={!!message.email}
-                helperText={message.email}
+                onChange={handlechange}
+                error={!!message}
+                helperText={message}
               />
             </FormControl>
             <FormControl fullWidth>
@@ -122,8 +164,9 @@ const SignInSide = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                error={!!message.password}
-                helperText={message.password}
+                onChange={handlechange}
+                error={!!password}
+                helperText={password}
               />
             </FormControl>
             <FormControlLabel

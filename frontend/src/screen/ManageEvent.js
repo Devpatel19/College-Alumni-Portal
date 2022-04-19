@@ -61,10 +61,13 @@ const EventManage = () => {
   events?.map((event) => {
     data.push({
       name: event.Name,
-      date: event.Date,
       id: event._id,
       description: event.Description,
-      date: event.Date,
+      date: new Date(event.Date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
     });
   });
 

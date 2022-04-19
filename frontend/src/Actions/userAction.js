@@ -132,6 +132,7 @@ export const Aprroval = (user) => async (dispatch, getState) => {
       user,
       config
     );
+    console.log({ data });
 
     dispatch({
       type: USER_APPROVAL_SUCCESS,

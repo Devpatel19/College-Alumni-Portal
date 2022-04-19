@@ -74,7 +74,6 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          {error && <p className={err.error}>{error}</p>}
           {loading && <Loader />}
           <Box
             component="form"
@@ -82,6 +81,8 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
+            {error && <p className={err.error}>{error}</p>}
+            <br />
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField

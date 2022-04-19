@@ -59,7 +59,6 @@ const EditJob = async (req, res) => {
     "City",
     "RequireSkill",
     "Salary",
-    "ExtraDetail",
   ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)

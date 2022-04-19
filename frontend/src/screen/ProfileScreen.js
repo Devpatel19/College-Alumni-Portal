@@ -27,6 +27,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -45,21 +46,25 @@ const ProfileScreen = () => {
 
   const profileRead = useSelector((state) => state.profileRead);
   const { ProfileInfo } = profileRead;
-
   useEffect(() => {
     if (ProfileInfoupdate) {
       dispatch(profilesRead(userInfo._id));
     }
     if (profileInfo) {
       dispatch(profilesRead(userInfo._id));
-      dispatch(Aprroval({ _id: userInfo._id, isProfileUpdate: true }));
+      const val = dispatch(
+        Aprroval({ _id: userInfo._id, isProfileUpdate: true })
+      );
+      // navigate(`/login/${userInfo.type}/profile`);
     }
     if (userInfo.isProfileUpdate) {
       dispatch(profilesRead(userInfo._id));
     }
   }, [userInfo, profileInfo, ProfileInfoupdate, dispatch]);
   const [value, setValue] = React.useState(
-    new Date(`${ProfileInfo?.Passingyear}`)
+    ProfileInfo?.Passingyear
+      ? new Date(`${ProfileInfo?.Passingyear}`)
+      : new Date()
   );
 
   const [editvalues, setEditValues] = useState({
@@ -90,8 +95,8 @@ const ProfileScreen = () => {
     if (value !== null) {
       editvalues["Passingyear"] = value.getFullYear();
     }
-    console.log(editvalues);
-    userInfo.isProfileUpdate
+
+    ProfileInfo
       ? dispatch(Updateprofile(editvalues))
       : dispatch(profilesPost(editvalues));
   };
@@ -184,7 +189,7 @@ const ProfileScreen = () => {
               <Col md="6">
                 <FormGroup>
                   <label>Passingyear</label>
-                  {userInfo.isProfileUpdate && (
+                  {/* {profileInfo && (
                     <Input
                       name="Passingyear"
                       value={ProfileInfo?.Passingyear}
@@ -192,7 +197,7 @@ const ProfileScreen = () => {
                       type="text"
                       disabled
                     />
-                  )}
+                  )} */}
                   <br />
 
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -229,7 +234,7 @@ const ProfileScreen = () => {
             </Row>
             <Row>
               <div className="update ml-auto mr-auto">
-                {userInfo.isProfileUpdate ? (
+                {ProfileInfo ? (
                   <Button className="btn-round" color="primary" type="submit">
                     Update Profile
                   </Button>

@@ -27,7 +27,7 @@ const DashboardAlumni = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo.type === "Alumni") {
       dispatch(dashboardDetail());
     }
   }, [userInfo, dispatch]);
