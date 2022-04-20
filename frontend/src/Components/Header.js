@@ -16,6 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { logout } from "../Actions/userAction";
 import { profilesRead } from "../Actions/profileAction";
 import SchoolIcon from "@mui/icons-material/School";
+import Container from "@mui/material/Container";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -75,80 +76,82 @@ const Navbar = () => {
   }, [userInfo, dispatch]);
 
   return (
-    <AppBar position="fixed" color="primary">
-      <Toolbar>
-        <Typography variant="h5" className={classes.title}>
-          <Button
-            color="inherit"
-            onClick={Home}
-            style={{ color: "#fff", fontSize: "20px" }}
-          >
-            <SchoolIcon
-              sx={{ fontSize: "50px", marginRight: "15px", color: "#fff" }}
-            />
-            {!isMobile && <b>College Alumni Portal</b>}
-          </Button>
-        </Typography>
-        {!userInfo ? (
-          <>
-            <Button color="inherit" onClick={Register}>
-              Sign Up
+    <AppBar position="fixed">
+      <Container maxWidth="100%" sx={{ backgroundColor: "#236c7e" }}>
+        <Toolbar>
+          <Typography variant="h5" className={classes.title}>
+            <Button
+              color="inherit"
+              onClick={Home}
+              style={{ color: "#fff", fontSize: "20px" }}
+            >
+              <SchoolIcon
+                sx={{ fontSize: "50px", marginRight: "15px", color: "#fff" }}
+              />
+              {!isMobile && <b>College Alumni Portal</b>}
             </Button>
-            <Button color="inherit" onClick={Login}>
-              Sign In
-            </Button>
-          </>
-        ) : (
-          <>
-            <Box sx={{ flexGrow: 0 }}>
-              <Button color="inherit" onClick={dashboard}>
-                Dashboard
+          </Typography>
+          {!userInfo ? (
+            <>
+              <Button color="inherit" onClick={Register}>
+                Sign Up
               </Button>
+              <Button color="inherit" onClick={Login}>
+                Sign In
+              </Button>
+            </>
+          ) : (
+            <>
+              <Box sx={{ flexGrow: 0 }}>
+                <Button color="inherit" onClick={dashboard}>
+                  Dashboard
+                </Button>
 
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu}>
-                  {ProfileInfo?.Image ? (
-                    <Avatar
-                      src={`http://localhost:5000/${ProfileInfo?.Image}`}
-                    />
-                  ) : (
-                    <Avatar sx={{ bgcolor: "orange" }}>
-                      {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}
-                    </Avatar>
-                  )}
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography
-                      textAlign="center"
-                      onClick={() => settingHandler(setting)}
-                    >
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          </>
-        )}
-      </Toolbar>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu}>
+                    {ProfileInfo?.Image ? (
+                      <Avatar
+                        src={`http://localhost:5000/${ProfileInfo?.Image}`}
+                      />
+                    ) : (
+                      <Avatar sx={{ bgcolor: "orange" }}>
+                        {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}
+                      </Avatar>
+                    )}
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography
+                        textAlign="center"
+                        onClick={() => settingHandler(setting)}
+                      >
+                        {setting}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            </>
+          )}
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };

@@ -27,6 +27,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const ProfileScreen = () => {
@@ -113,9 +114,16 @@ const ProfileScreen = () => {
             <Row>
               <Col className="pr-1" md="2">
                 {ProfileInfo?.Image && (
-                  <CardImg
-                    src={`http://localhost:5000/${ProfileInfo.Image}`}
-                    alt="Card image cap"
+                  <Avatar
+                    variant="square"
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                      borderRadius: "5px",
+
+                      backgroundSize: "cover",
+                    }}
+                    src={`http://localhost:5000/${ProfileInfo?.Image}`}
                   />
                 )}
               </Col>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Components/Loader";
 import { login } from "../Actions/userAction";
-import err from "../Screen-css/errors.module.css";
+
 import validateL from "../Components/validateL";
 import validator from "validator";
 import Avatar from "@mui/material/Avatar";
@@ -38,10 +38,16 @@ const SignInSide = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
   const [type, setType] = useState("");
+  const [open, setOpen] = useState();
+
+  const handleClick = () => {
+    setOpen(true);
+  };
 
   const handlechange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
+    setNew("");
     if (name === "email") {
       if (!validator.isEmail(value)) {
         setMessage("Email address is invalid");
@@ -65,9 +71,10 @@ const SignInSide = () => {
       navigate(`/login/${type}`);
     }
   }, [userInfo, navigate, type]);
-  const [open, setOpen] = useState(true);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleClick();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
@@ -81,6 +88,7 @@ const SignInSide = () => {
       dispatch(login(values));
     }
   };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -114,11 +122,23 @@ const SignInSide = () => {
           >
             {error && (
               <Snackbar
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                sx={{ width: 400 }}
                 open={open}
                 autoHideDuration={6000}
-                message={error}
                 onClose={handleClose}
-              />
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="error"
+                  sx={{ width: "100%" }}
+                >
+                  {error}
+                </Alert>
+              </Snackbar>
             )}
             {loading && <Loader />}
             <br />
@@ -131,8 +151,8 @@ const SignInSide = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Types of login"
-                error={!!news}
-                helperText={news}
+                error={!!news.type}
+                helperText={news.type}
               >
                 <MenuItem value="Admin">Admin</MenuItem>
                 <MenuItem value="Alumni">Alumni</MenuItem>
@@ -150,7 +170,7 @@ const SignInSide = () => {
                 autoComplete="email"
                 autoFocus
                 onChange={handlechange}
-                error={!!message}
+                error={!!message || !!news.email}
                 helperText={message}
               />
             </FormControl>
@@ -165,7 +185,7 @@ const SignInSide = () => {
                 id="password"
                 autoComplete="current-password"
                 onChange={handlechange}
-                error={!!password}
+                error={!!password || !!news.password}
                 helperText={password}
               />
             </FormControl>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Components/Loader";
-import validate from "../Components/validator";
+
 import err from "../Screen-css/errors.module.css";
 import { signup } from "../Actions/userAction";
 import Avatar from "@mui/material/Avatar";
@@ -17,9 +17,13 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import validator from "validator";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import validateInfo from "../Components/validator";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 const theme = createTheme();
 
@@ -32,14 +36,30 @@ export default function SignUp() {
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
 
+  const [validate, setvalidate] = useState({
+    Name: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+    mobileNo: "",
+  });
+  const [open, setOpen] = useState();
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
   useEffect(() => {
     if (userInfo) {
       navigate("/HomeScreen/login");
     }
   }, [userInfo, navigate]);
 
+  const [validpassword, setvalidpassword] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleClick();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
@@ -48,12 +68,65 @@ export default function SignUp() {
     const cpassword = data.get("confirmpassword");
 
     const values = { email, password, name, mobileNo, type, cpassword };
-    const mess = validate(values);
+    const mess = validateInfo(values);
     if (Object.keys(mess).length !== 0) {
       setMessage(mess);
     } else {
       dispatch(signup(values));
     }
+  };
+  const handlechange = (e) => {
+    setMessage("");
+    const name = e.target.name;
+    const value = e.target.value;
+    let error;
+    if (name === "Name") {
+      if (!value) {
+        error = "Required";
+      } else {
+        error = "";
+      }
+      setvalidate({ Name: error });
+    } else if (name === "email") {
+      if (!validator.isEmail(value)) {
+        error = "Email address is invalid";
+      } else {
+        error = "";
+      }
+      setvalidate({ email: error });
+    } else if (name === "password") {
+      if (value.length < 6) {
+        error = "Password needs to be 6 characters or more";
+      } else {
+        error = "";
+      }
+      setvalidate({ password: error });
+      setvalidpassword(value);
+    } else if (name === "confirmpassword") {
+      if (value !== validpassword) {
+        error = "Passwords do not match";
+      } else {
+        error = "";
+      }
+      setvalidate({ confirmpassword: error });
+    } else if (name === "mobileNo") {
+      if (!validator.isMobilePhone(value, ["en-IN"])) {
+        error = "mobileNo is invalid";
+      } else {
+        error = "";
+      }
+      setvalidate({ mobileNo: error });
+    } else {
+      console.log(name, value);
+    }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -68,6 +141,26 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
+          {error && (
+            <Snackbar
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+              sx={{ width: 400 }}
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert
+                onClose={handleClose}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                {error}
+              </Alert>
+            </Snackbar>
+          )}
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -81,8 +174,6 @@ export default function SignUp() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            {error && <p className={err.error}>{error}</p>}
-            <br />
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -92,8 +183,9 @@ export default function SignUp() {
                   fullWidth
                   id="Name"
                   label="Name"
-                  error={!!message.name}
-                  helperText={message.name}
+                  onChange={handlechange}
+                  error={!!validate.Name || !!message.name}
+                  helperText={validate.Name}
                   autoFocus
                 />
               </Grid>
@@ -106,8 +198,9 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  error={!!message.email}
-                  helperText={message.email}
+                  onChange={handlechange}
+                  error={!!validate.email || !!message.email}
+                  helperText={validate.email}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -119,8 +212,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  error={!!message.password}
-                  helperText={message.password}
+                  onChange={handlechange}
+                  error={!!validate.password || !!message.password}
+                  helperText={validate.password}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -132,8 +226,9 @@ export default function SignUp() {
                   type="password"
                   id="confirmpassword"
                   autoComplete="new-password"
-                  error={!!message.cpassword}
-                  helperText={message.cpassword}
+                  onChange={handlechange}
+                  error={!!validate.confirmpassword || !!message.cpassword}
+                  helperText={validate.confirmpassword}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -143,9 +238,11 @@ export default function SignUp() {
                   id="mobileNo"
                   label="Mobile No."
                   name="mobileNo"
+                  type="number"
                   autoComplete="mobileNo"
-                  error={!!message.mobileNo}
-                  helperText={message.mobileNo}
+                  onChange={handlechange}
+                  error={!!validate.mobileNo || !!message.mobileNo}
+                  helperText={validate.mobileNo}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -157,9 +254,11 @@ export default function SignUp() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Types of User"
-                    onChange={(e) => setType(e.target.value)}
+                    onChange={(e) => {
+                      setType(e.target.value);
+                    }}
                     error={!!message.type}
-                    helperText={message.type}
+                    helperText={message}
                   >
                     <MenuItem value="Admin">Admin</MenuItem>
                     <MenuItem value="Alumni">Alumni</MenuItem>

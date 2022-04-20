@@ -42,7 +42,9 @@ const SideNavigation = () => {
     navigate("/HomeScreen/login");
   };
   return (
-    <div style={{ minHeight: "94.5vh", height: "auto" }}>
+    <div
+      style={{ minHeight: "94.5vh", height: "auto", backgroundColor: "red" }}
+    >
       <ProSidebar style={styles.sideBarHeight} collapsed={collapsed}>
         <SidebarHeader>
           <b>
