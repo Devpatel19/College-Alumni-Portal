@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ReadJobApply } from "../Actions/DetailAction";
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 const MyApplyJob = () => {
   const dispatch = useDispatch();
@@ -18,15 +18,15 @@ const MyApplyJob = () => {
     }
   }, [userInfo, dispatch]);
   const data = [];
-  MyApplyJob?.map((myjob) => {
+  MyApplyJob?.map((myjob) =>
     data.push({
       CompanyName: myjob.Job.CompanyName,
       Role: myjob.Job.Role,
       Salary: myjob.Job.Salary,
       Experience: myjob.Job.Experience,
       City: myjob.Job.City,
-    });
-  });
+    })
+  );
 
   const columns = [
     { title: "CompanyName", field: "CompanyName" },
@@ -46,7 +46,7 @@ const MyApplyJob = () => {
         actionsColumnIndex: -1,
         rowStyle: { backgroundColor: "#EEE" },
         headerStyle: {
-          backgroundColor: "#13504A",
+          backgroundColor: "rgb(25 118 210)",
           color: "#FFF",
         },
       }}

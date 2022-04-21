@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import { deletejob, readJob, updateJob } from "../Actions/JobAction";
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 import { Box } from "@mui/system";
 import Modal from "@mui/material/Modal";
@@ -14,7 +14,6 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormControl } from "@mui/material";
 
@@ -113,7 +112,7 @@ const JobReadScreen = () => {
   }, [dispatch, userInfo, success, navigate]);
 
   const data = [];
-  jobs?.map((job) => {
+  jobs?.map((job) =>
     data.push({
       CompanyName: job.CompanyName,
       Role: job.Role,
@@ -122,8 +121,8 @@ const JobReadScreen = () => {
       Salary: job.Salary,
       _id: job._id,
       Experience: job.Experience,
-    });
-  });
+    })
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -160,21 +159,22 @@ const JobReadScreen = () => {
           actionsColumnIndex: -1,
           rowStyle: { backgroundColor: "#EEE" },
           headerStyle: {
-            backgroundColor: "#13504A",
+            backgroundColor: "rgb(25 118 210)",
             color: "#FFF",
           },
         }}
+        onRowClick={(evt, rowData) => viewData(rowData._id)}
         actions={[
           {
             icon: tableIcons.Delete,
             tooltip: "Delete User",
             onClick: (event, rowData) => handleDeleteopen(rowData),
           },
-          (rowData) => ({
-            icon: tableIcons.DetailPanel,
-            tooltip: "View Detail",
-            onClick: (event, rowData) => viewData(rowData._id),
-          }),
+          // (rowData) => ({
+          //   icon: tableIcons.DetailPanel,
+          //   tooltip: "View Detail",
+          //   onClick: (event, rowData) => viewData(rowData._id),
+          // }),
           (rowData) => ({
             icon: tableIcons.Edit,
             tooltip: "Edit Job",

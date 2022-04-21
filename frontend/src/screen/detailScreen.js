@@ -1,19 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 
 const DetailScreen = () => {
   const DetailRead = useSelector((state) => state.DetailRead);
   const { Details } = DetailRead;
   const data = [];
-  Details?.map((detail) => {
+  Details?.map((detail) =>
     data.push({
       email: detail.Email,
       name: detail.Name,
       mobileNo: detail.MobileNo,
-    });
-  });
+    })
+  );
 
   const columns = [
     { title: "Email", field: "email" },
@@ -31,7 +31,7 @@ const DetailScreen = () => {
         actionsColumnIndex: -1,
         rowStyle: { backgroundColor: "#EEE" },
         headerStyle: {
-          backgroundColor: "#13504A",
+          backgroundColor: "rgb(25 118 210)",
           color: "#FFF",
         },
       }}

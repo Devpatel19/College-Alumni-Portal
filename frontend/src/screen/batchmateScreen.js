@@ -40,7 +40,7 @@ const Batchmates = () => {
       ) : (
         <Grid className="sample-grid" container spacing={1}>
           {dsgad.map((profile) => (
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4} key={profile._id}>
               <Card
                 sx={{
                   backgroundColor: "lightsalmon",

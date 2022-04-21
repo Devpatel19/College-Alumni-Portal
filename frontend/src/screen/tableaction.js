@@ -15,7 +15,8 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
-import { Button } from "@material-ui/core";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -41,33 +42,7 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   Verify: forwardRef((props, ref) => <BorderColorIcon {...props} ref={ref} />),
   Button: forwardRef((props, ref) => (
-    <Button
-      variant="contained"
-      {...props}
-      ref={ref}
-      style={{
-        backgroundColor: "#EFBC80",
-        color: "#EE6855",
-        fontWeight: "700",
-      }}
-    >
-      Verify
-    </Button>
-  )),
-  DisabledButton: forwardRef((props, ref) => (
-    <Button
-      variant="contained"
-      {...props}
-      ref={ref}
-      style={{
-        cursor: "not-allowed",
-        backgroundColor: "#74C7F7",
-        color: "#fff",
-      }}
-      disabled
-    >
-      Verify
-    </Button>
+    <VerifiedIcon color="primary" {...props} ref={ref} />
   )),
 };
 

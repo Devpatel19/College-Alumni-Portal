@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Components/Loader";
-
-import err from "../Screen-css/errors.module.css";
 import { signup } from "../Actions/userAction";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -253,12 +251,13 @@ export default function SignUp() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
+                    value={type}
                     label="Types of User"
                     onChange={(e) => {
                       setType(e.target.value);
                     }}
                     error={!!message.type}
-                    helperText={message}
+                    // helperText={message}
                   >
                     <MenuItem value="Admin">Admin</MenuItem>
                     <MenuItem value="Alumni">Alumni</MenuItem>

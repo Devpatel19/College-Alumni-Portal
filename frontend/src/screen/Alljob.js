@@ -33,7 +33,7 @@ const JobListScreen = () => {
         <>
           <Grid container spacing={2}>
             {jobs.map((job) => (
-              <Grid xs={12} sm={3}>
+              <Grid item xs={12} sm={3} key={job._id}>
                 <br />
                 <Job job={job} />
               </Grid>

@@ -12,6 +12,7 @@ const StudentScreen = () => {
     contentMargin: {
       marginLeft: "8px",
       width: "100%",
+      padding: "10px",
     },
   };
   const navigate = useNavigate();

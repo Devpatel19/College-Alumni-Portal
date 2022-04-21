@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Card,
-  CardImg,
   CardBody,
   CardHeader,
   CardTitle,
@@ -28,7 +27,6 @@ import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -53,10 +51,7 @@ const ProfileScreen = () => {
     }
     if (profileInfo) {
       dispatch(profilesRead(userInfo._id));
-      const val = dispatch(
-        Aprroval({ _id: userInfo._id, isProfileUpdate: true })
-      );
-      // navigate(`/login/${userInfo.type}/profile`);
+      dispatch(Aprroval({ _id: userInfo._id, isProfileUpdate: true }));
     }
     if (userInfo.isProfileUpdate) {
       dispatch(profilesRead(userInfo._id));
@@ -197,15 +192,6 @@ const ProfileScreen = () => {
               <Col md="6">
                 <FormGroup>
                   <label>Passingyear</label>
-                  {/* {profileInfo && (
-                    <Input
-                      name="Passingyear"
-                      value={ProfileInfo?.Passingyear}
-                      placeholder="Passing Year"
-                      type="text"
-                      disabled
-                    />
-                  )} */}
                   <br />
 
                   <LocalizationProvider dateAdapter={AdapterDateFns}>

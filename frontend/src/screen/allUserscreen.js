@@ -1,4 +1,4 @@
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 import { readalluser, Aprroval, deleteuser } from "../Actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,6 @@ const style = {
   position: "absolute",
   top: "40%",
   left: "40%",
-
   width: 400,
   bgcolor: "white",
   border: "2px solid #000",
@@ -73,7 +72,7 @@ const BasicTable = () => {
   const { users } = userList;
   const data = [];
 
-  users?.map((user) => {
+  users?.map((user) =>
     data.push({
       name: user.name,
       email: user.email,
@@ -81,8 +80,8 @@ const BasicTable = () => {
       type: user.type,
       verify: user.verify,
       id: user._id,
-    });
-  });
+    })
+  );
 
   const columns = [
     { title: "Name", field: "name" },
@@ -105,7 +104,7 @@ const BasicTable = () => {
           actionsColumnIndex: -1,
           rowStyle: { backgroundColor: "#EEE" },
           headerStyle: {
-            backgroundColor: "#13504A",
+            backgroundColor: "rgb(25 118 210)",
             color: "#FFF",
           },
         }}
@@ -117,12 +116,9 @@ const BasicTable = () => {
           },
           (rowData) => ({
             icon:
-              rowData.verify === false
-                ? tableIcons.Button
-                : tableIcons.DisabledButton,
+              rowData.verify === false ? tableIcons.Edit : tableIcons.Button,
             tooltip:
               rowData.verify === false ? "Verify User" : "Already verified",
-            //   isFreeAction: true,
             disabled: rowData.verify,
             onClick: (event, rowData) => handleOpen(rowData),
           }),

@@ -138,10 +138,7 @@ const Navbar = () => {
                 >
                   {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography
-                        textAlign="center"
-                        onClick={() => settingHandler(setting)}
-                      >
+                      <Typography onClick={() => settingHandler(setting)}>
                         {setting}
                       </Typography>
                     </MenuItem>

@@ -149,10 +149,10 @@ const SignInSide = () => {
               <Select
                 onChange={handlechange}
                 labelId="demo-simple-select-label"
+                value={type}
                 id="demo-simple-select"
                 label="Types of login"
                 error={!!news.type}
-                helperText={news.type}
               >
                 <MenuItem value="Admin">Admin</MenuItem>
                 <MenuItem value="Alumni">Alumni</MenuItem>

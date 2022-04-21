@@ -18,6 +18,7 @@ import { Animation } from "@devexpress/dx-react-chart";
 import { useSelector, useDispatch } from "react-redux";
 import { dashboardDetail } from "../Actions/Dashboardaction";
 import Loader from "../Components/Loader";
+import { readalljobs } from "../Actions/JobAction";
 
 const DashboardStudent = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,12 @@ const DashboardStudent = () => {
   const AllProfile = useSelector((state) => state.AllProfile);
   const { AllProfiles } = AllProfile;
 
+  const JobList = useSelector((state) => state.JobList);
+  const { jobs } = JobList;
+
   useEffect(() => {
     if (userInfo) {
+      dispatch(readalljobs());
       dispatch(allprofilesRead());
       dispatch(profilesRead(userInfo._id));
     }
@@ -53,6 +58,17 @@ const DashboardStudent = () => {
       profile.Passingyear === ProfileInfo?.Passingyear &&
       profile.Email !== userInfo.email
   ).length;
+
+  const t20 = jobs?.filter((job) => job.Salary <= 20000).length;
+  const t25 = jobs?.filter(
+    (job) => job.Salary <= 25000 && job.Salary > 20000
+  ).length;
+
+  const t30 = jobs?.filter(
+    (job) => job.Salary > 25000 && job.Salary <= 30000
+  ).length;
+
+  const t35 = jobs?.filter((job) => job.Salary > 30000).length;
 
   return (
     <Box sx={{ flexGrow: 1, paddingTop: "20px" }}>
@@ -117,10 +133,10 @@ const DashboardStudent = () => {
             <Card>
               <Chart
                 data={[
-                  { year: "<20000", population: 2 },
-                  { year: "20000 - 25000", population: 4 },
-                  { year: "25000 - 30000", population: 7 },
-                  { year: ">30000", population: 10 },
+                  { year: "<20000", population: t20 },
+                  { year: "20000 - 25000", population: t25 },
+                  { year: "25000 - 30000", population: t30 },
+                  { year: ">30000", population: t35 },
                 ]}
               >
                 <ArgumentAxis />

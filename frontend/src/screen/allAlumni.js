@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 import { readalluser, Aprroval } from "../Actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,17 +74,17 @@ const BasicTable = () => {
   }, [dispatch, userInfo, success, userd, navigate]);
 
   const data = [];
-  users?.map((user) => {
-    if (user.type === "Alumni") {
-      data.push({
-        name: user.name,
-        email: user.email,
-        mobileNo: user.mobileNo,
-        verify: user.verify,
-        id: user._id,
-      });
-    }
-  });
+  users?.map((user) =>
+    user.type === "Alumni"
+      ? data.push({
+          name: user.name,
+          email: user.email,
+          mobileNo: user.mobileNo,
+          verify: user.verify,
+          id: user._id,
+        })
+      : ""
+  );
 
   const columns = [
     { title: "Name", field: "name" },
@@ -104,7 +104,7 @@ const BasicTable = () => {
           actionsColumnIndex: -1,
           rowStyle: { backgroundColor: "#EEE" },
           headerStyle: {
-            backgroundColor: "#13504A",
+            backgroundColor: "rgb(25 118 210)",
             color: "#FFF",
           },
         }}
@@ -116,9 +116,7 @@ const BasicTable = () => {
           },
           (rowData) => ({
             icon:
-              rowData.verify === false
-                ? tableIcons.Button
-                : tableIcons.DisabledButton,
+              rowData.verify === false ? tableIcons.Edit : tableIcons.Button,
             tooltip:
               rowData.verify === false ? "Verify User" : "Already verified",
             disabled: rowData.verify,

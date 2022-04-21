@@ -12,6 +12,7 @@ const AlumniScreen = () => {
       marginLeft: "20px",
       width: "100%",
       display: "flex",
+      padding: "10px",
     },
   };
   const navigate = useNavigate();

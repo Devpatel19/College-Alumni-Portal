@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import MaterialTable from "material-table";
+import MaterialTable from "@material-table/core";
 import tableIcons from "./tableaction";
 import { useDispatch } from "react-redux";
 import { readallevents } from "../Actions/EventAction";
@@ -14,7 +14,6 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormControl } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -39,14 +38,17 @@ const style = {
 const EventManage = () => {
   const dispatch = useDispatch();
 
+  const UpdateEvent = useSelector((state) => state.UpdateEvent);
+  const { eventU } = UpdateEvent;
+
   const DeleteEvent = useSelector((state) => state.DeleteEvent);
   const { eventd } = DeleteEvent;
 
   useEffect(() => {
     dispatch(readallevents());
-  }, [eventd]);
+  }, [eventd, dispatch, eventU]);
   const EventList = useSelector((state) => state.EventList);
-  const { loading, error, events } = EventList;
+  const { events } = EventList;
   const [datas, setData] = useState({});
   const [deletes, setDelete] = useState(false);
 
@@ -58,7 +60,7 @@ const EventManage = () => {
   const uploadImage = useSelector((state) => state.uploadImage);
   const { images } = uploadImage;
 
-  events?.map((event) => {
+  events?.map((event) =>
     data.push({
       name: event.Name,
       id: event._id,
@@ -68,8 +70,8 @@ const EventManage = () => {
         month: "long",
         day: "numeric",
       }),
-    });
-  });
+    })
+  );
 
   const [open, setOpen] = React.useState(false);
 
@@ -130,7 +132,7 @@ const EventManage = () => {
           actionsColumnIndex: -1,
           rowStyle: { backgroundColor: "#EEE" },
           headerStyle: {
-            backgroundColor: "#13504A",
+            backgroundColor: "rgb(25 118 210)",
             color: "#FFF",
           },
         }}

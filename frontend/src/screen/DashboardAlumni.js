@@ -19,6 +19,7 @@ import { dashboardDetail } from "../Actions/Dashboardaction";
 import Loader from "../Components/Loader";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import WorkIcon from "@mui/icons-material/Work";
+import { readalljobs } from "../Actions/JobAction";
 
 const DashboardAlumni = () => {
   const dispatch = useDispatch();
@@ -26,14 +27,29 @@ const DashboardAlumni = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const JobList = useSelector((state) => state.JobList);
+  const { jobs } = JobList;
+
   useEffect(() => {
     if (userInfo.type === "Alumni") {
+      dispatch(readalljobs());
       dispatch(dashboardDetail());
     }
   }, [userInfo, dispatch]);
 
   const DashboardDetail = useSelector((state) => state.DashboardDetail);
   const { loading, DetailDashboard } = DashboardDetail;
+
+  const t20 = jobs?.filter((job) => job.Salary <= 20000).length;
+  const t25 = jobs?.filter(
+    (job) => job.Salary <= 25000 && job.Salary > 20000
+  ).length;
+
+  const t30 = jobs?.filter(
+    (job) => job.Salary > 25000 && job.Salary <= 30000
+  ).length;
+
+  const t35 = jobs?.filter((job) => job.Salary > 30000).length;
 
   return (
     <Box sx={{ flexGrow: 1, paddingTop: "20px" }}>
@@ -95,10 +111,10 @@ const DashboardAlumni = () => {
             <Card>
               <Chart
                 data={[
-                  { year: "<20000", population: 2 },
-                  { year: "20000 - 25000", population: 4 },
-                  { year: "25000 - 30000", population: 7 },
-                  { year: ">30000", population: 10 },
+                  { year: "<20000", population: t20 },
+                  { year: "20000 - 25000", population: t25 },
+                  { year: "25000 - 30000", population: t30 },
+                  { year: ">30000", population: t35 },
                 ]}
               >
                 <ArgumentAxis />
