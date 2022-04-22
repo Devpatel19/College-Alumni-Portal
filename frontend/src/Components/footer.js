@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 
-import classes from "./index.module.css";
+import classes from "../Screen-css/index.module.css";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SchoolIcon from "@mui/icons-material/School";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";

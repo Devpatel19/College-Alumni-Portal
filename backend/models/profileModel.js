@@ -49,7 +49,10 @@ const profileSchema = new mongoose.Schema(
 
 profileSchema.methods.generateAuthToken = async function () {
   const profile = this;
-  const token = jwt.sign({ _id: profile._id.toString() }, "thisismyDemocourse");
+  const token = jwt.sign(
+    { _id: profile._id.toString() },
+    process.env.JWT_SECRET
+  );
   await profile.save();
 
   return token;

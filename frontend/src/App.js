@@ -20,7 +20,6 @@ import ProfileScreen from "./screen/ProfileScreen";
 import DetailScreen from "./screen/detailScreen";
 import MyApplyJob from "./screen/myapplyjob";
 import Batchmates from "./screen/batchmateScreen";
-import SettingScreen from "./screen/SettingScreeen";
 import ForgotPassword from "./screen/Forgotpasswordscreen";
 import ChangePassword from "./screen/changepassword";
 import DashboardAlumni from "./screen/DashboardAlumni";
@@ -54,7 +53,6 @@ function App() {
               <Route path="allevents" element={<EventListScreen />} />
               <Route path="createEvent" element={<EventScreen />} />
               <Route path="profile" element={<ProfileScreen />} />
-              <Route path="setting" element={<SettingScreen />} />
               <Route path="Dashboard" element={<Dashboard />} />
               <Route path="allstudent" element={<Allstudent />} />
               <Route path="allalumni" element={<Allalumni />} />
@@ -68,7 +66,6 @@ function App() {
               <Route path="profile" element={<ProfileScreen />} />
               <Route path="myApplyjob" element={<MyApplyJob />} />
               <Route path="batchmate" element={<Batchmates />} />
-              <Route path="setting" element={<SettingScreen />} />
             </Route>
             <Route path="/login/Alumni" element={<AlumniScreen />}>
               <Route path="Dashboard" element={<DashboardAlumni />} />
@@ -79,7 +76,6 @@ function App() {
               <Route path="Details" element={<DetailScreen />} />
               <Route path="profile" element={<ProfileScreen />} />
               <Route path="batchmate" element={<Batchmates />} />
-              <Route path="setting" element={<SettingScreen />} />
             </Route>
           </Routes>
         </main>
