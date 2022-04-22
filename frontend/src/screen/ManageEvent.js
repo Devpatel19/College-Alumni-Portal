@@ -206,6 +206,8 @@ const EventManage = () => {
               label="Description"
               name="description"
               autoComplete="description"
+              rows={4}
+              multiline
               onChange={(e) => {
                 setDescription(e.target.value);
               }}

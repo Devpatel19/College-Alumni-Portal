@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
+import { BASE_URL } from "../constants/baseurl";
 const style = {
   position: "absolute",
   top: "40%",
@@ -36,8 +37,9 @@ const Event = ({ eve }) => {
     <div>
       <Card
         sx={{
-          Width: 300,
-          height: 350,
+          maxWidth: 400,
+          // maxHeight: 410,
+          minHeight: 365,
           boxShadow: "5px 5px 10px grey",
           transition: "all 0.5s ease",
           backgroundColor: "InactiveBorder",
@@ -50,7 +52,7 @@ const Event = ({ eve }) => {
         <CardMedia
           component="img"
           height="140"
-          image={`http://localhost:5000/${eve.ImageLocation}`}
+          image={`${BASE_URL}/${eve.ImageLocation}`}
           alt="green iguana"
         />
         <CardContent>

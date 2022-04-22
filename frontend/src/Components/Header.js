@@ -17,6 +17,7 @@ import { logout } from "../Actions/userAction";
 import { profilesRead } from "../Actions/profileAction";
 import SchoolIcon from "@mui/icons-material/School";
 import Container from "@mui/material/Container";
+import { BASE_URL } from "../constants/baseurl";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -110,9 +111,7 @@ const Navbar = () => {
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu}>
                     {ProfileInfo?.Image ? (
-                      <Avatar
-                        src={`http://localhost:5000/${ProfileInfo?.Image}`}
-                      />
+                      <Avatar src={`${BASE_URL}/${ProfileInfo?.Image}`} />
                     ) : (
                       <Avatar sx={{ bgcolor: "orange" }}>
                         {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}

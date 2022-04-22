@@ -27,6 +27,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import { BASE_URL } from "../constants/baseurl";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const ProfileScreen = () => {
 
                       backgroundSize: "cover",
                     }}
-                    src={`http://localhost:5000/${ProfileInfo?.Image}`}
+                    src={`${BASE_URL}/${ProfileInfo?.Image}`}
                   />
                 )}
               </Col>

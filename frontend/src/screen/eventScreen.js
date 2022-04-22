@@ -134,10 +134,15 @@ const EventScreen = () => {
               margin="normal"
               required
               fullWidth
-              id="description"
+              id="outlined-multiline-static"
+              maxrows={5}
               label="Description"
               name="description"
+              multiline
               autoComplete="description"
+              inputProps={{
+                maxLength: 255,
+              }}
               onChange={(e) => {
                 setDescription(e.target.value);
               }}

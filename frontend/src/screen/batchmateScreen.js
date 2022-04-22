@@ -7,6 +7,7 @@ import Loader from "../Components/Loader";
 import { allprofilesRead, profilesRead } from "../Actions/profileAction";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Avatar } from "@mui/material";
+import { BASE_URL } from "../constants/baseurl";
 
 const Batchmates = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Batchmates = () => {
                 }}
               >
                 <Avatar
-                  src={`http://localhost:5000/${profile.Image}`}
+                  src={`${BASE_URL}/${profile.Image}`}
                   sx={{ width: 150, height: 150, alignSelf: "center" }}
                 ></Avatar>
                 <CardContent>

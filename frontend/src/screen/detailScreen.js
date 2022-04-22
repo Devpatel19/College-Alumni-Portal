@@ -18,13 +18,13 @@ const DetailScreen = () => {
   const columns = [
     { title: "Email", field: "email" },
     { title: "Name", field: "name" },
-    { title: "MobileNo", field: "mobileNo", type: "numeric" },
+    { title: "MobileNo", field: "mobileNo" },
   ];
   return (
     <MaterialTable
       style={{ width: "100%" }}
       icons={tableIcons}
-      title="User Table"
+      title="Apply Details"
       columns={columns}
       data={data}
       options={{

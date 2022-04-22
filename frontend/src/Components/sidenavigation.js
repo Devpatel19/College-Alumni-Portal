@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaGem } from "react-icons/fa";
 import { Menu, MenuItem, ProSidebar, SidebarHeader } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useMedia } from "react-use";
 import { logout } from "../Actions/userAction";
 import { useNavigate } from "react-router-dom";
 import EventNoteIcon from "@mui/icons-material/EventNote";
@@ -16,14 +17,19 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SchoolIcon from "@mui/icons-material/School";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import TocIcon from "@mui/icons-material/Toc";
 
 const SideNavigation = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const isMobile = useMedia("(max-width: 720px)");
+  const [collapsed, setCollapsed] = useState(isMobile ? true : false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  useEffect(() => {
+    setCollapsed(isMobile ? true : false);
+  }, [isMobile]);
   const styles = {
     sideBarHeight: {
       minHeight: "100vh",
@@ -34,9 +40,11 @@ const SideNavigation = () => {
       margin: "10px",
     },
   };
+
   const onClickMenuIcon = () => {
     setCollapsed(!collapsed);
   };
+
   const logoutHandler = () => {
     dispatch(logout());
     navigate("/HomeScreen/login");
@@ -117,7 +125,7 @@ const SideNavigation = () => {
             ""
           )}
           {userInfo.type === "Admin" && (
-            <MenuItem icon={<GroupIcon />}>
+            <MenuItem icon={<TocIcon />}>
               <NavLink to="manageevent">Manage Event</NavLink>
             </MenuItem>
           )}
