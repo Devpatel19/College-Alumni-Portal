@@ -1,4 +1,4 @@
-const ApplyDetail = require("../models/ApplyDetail");
+const ApplyDetail = require("../models/applyDetail");
 
 const ApplyDetailPost = async (req, res) => {
   const Detail = new ApplyDetail(req.body);
