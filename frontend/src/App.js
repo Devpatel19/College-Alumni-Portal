@@ -49,10 +49,7 @@ function App() {
 
             <Route path="/login/Admin" element={<AdminScrren />}>
               <Route path="alluser" element={<UserListScreen />} />
-              <Route path="alljobs" element={<JobListScreen />} />
-              <Route path="allevents" element={<EventListScreen />} />
               <Route path="createEvent" element={<EventScreen />} />
-              <Route path="profile" element={<ProfileScreen />} />
               <Route path="Dashboard" element={<Dashboard />} />
               <Route path="allstudent" element={<Allstudent />} />
               <Route path="allalumni" element={<Allalumni />} />

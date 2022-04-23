@@ -20,8 +20,6 @@ import { Animation } from "@devexpress/dx-react-chart";
 import { useSelector, useDispatch } from "react-redux";
 import { dashboardDetail } from "../Actions/Dashboardaction";
 import Loader from "../Components/Loader";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import WorkIcon from "@mui/icons-material/Work";
 import SchoolIcon from "@mui/icons-material/School";
 import { readalljobs } from "../Actions/JobAction";
 
@@ -153,42 +151,6 @@ const Dashboard = () => {
                 <Animation />
               </Chart>
             </Card>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Link
-              to={"/login/Admin/alljobs"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              <Card sx={{ backgroundColor: "lightpink" }}>
-                <CardContent>
-                  <WorkIcon />
-                  <Typography gutterBottom variant="h5" component="div">
-                    Job
-                  </Typography>
-                  <Typography variant="h5" color="darkblue">
-                    {DetailDashboard?.TotalJob}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Link
-              to={"/login/Admin/allevents"}
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              <Card sx={{ backgroundColor: "lightgoldenrodyellow" }}>
-                <CardContent>
-                  <EventNoteIcon />
-                  <Typography gutterBottom variant="h5" component="div">
-                    Event
-                  </Typography>
-                  <Typography variant="h5" color="darkblue">
-                    {DetailDashboard?.TotalEvent}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
           </Grid>
           <Grid item xs={12} sm={4}>
             <></>

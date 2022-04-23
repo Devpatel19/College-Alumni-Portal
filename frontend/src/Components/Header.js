@@ -107,42 +107,45 @@ const Navbar = () => {
                 <Button color="inherit" onClick={dashboard}>
                   Dashboard
                 </Button>
-
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu}>
-                    {ProfileInfo?.Image ? (
-                      <Avatar src={`${BASE_URL}/${ProfileInfo?.Image}`} />
-                    ) : (
-                      <Avatar sx={{ bgcolor: "orange" }}>
-                        {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}
-                      </Avatar>
-                    )}
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography onClick={() => settingHandler(setting)}>
-                        {setting}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
+                {userInfo.type !== "Admin" && (
+                  <>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu}>
+                        {ProfileInfo?.Image ? (
+                          <Avatar src={`${BASE_URL}/${ProfileInfo?.Image}`} />
+                        ) : (
+                          <Avatar sx={{ bgcolor: "orange" }}>
+                            {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}
+                          </Avatar>
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: "45px" }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      {settings.map((setting) => (
+                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                          <Typography onClick={() => settingHandler(setting)}>
+                            {setting}
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </>
+                )}
               </Box>
             </>
           )}

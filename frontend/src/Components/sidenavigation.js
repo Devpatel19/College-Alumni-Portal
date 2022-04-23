@@ -77,9 +77,11 @@ const SideNavigation = () => {
               <NavLink to="alluser">Users</NavLink>
             </MenuItem>
           )}
-          <MenuItem icon={<EventNoteIcon />}>
-            <NavLink to="allevents">Events</NavLink>
-          </MenuItem>
+          {userInfo.type !== "Admin" && (
+            <MenuItem icon={<EventNoteIcon />}>
+              <NavLink to="allevents">Events</NavLink>
+            </MenuItem>
+          )}
           {userInfo.isAdmin && (
             <MenuItem icon={<PersonOutlineIcon />}>
               <NavLink to="allstudent">Student</NavLink>
@@ -95,9 +97,11 @@ const SideNavigation = () => {
               <NavLink to="alljobs">Jobs</NavLink>
             </MenuItem>
           )}
-          <MenuItem icon={<AccountCircleIcon />}>
-            <NavLink to="profile">Profile</NavLink>
-          </MenuItem>
+          {userInfo.type !== "Admin" && (
+            <MenuItem icon={<AccountCircleIcon />}>
+              <NavLink to="profile">Profile</NavLink>
+            </MenuItem>
+          )}
           {userInfo && userInfo.isAdmin && (
             <MenuItem icon={<AddCircleOutlineIcon />}>
               <NavLink to="createEvent">Create Events</NavLink>
