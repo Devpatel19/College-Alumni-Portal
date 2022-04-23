@@ -27,6 +27,14 @@
 //     sendWelcomeEmail
 // }
 
+// Hey [name],
+
+// You’re almost ready to start enjoying [customer portal].
+
+// Simply click the big [color] button below to verify your email address.
+
+// [button]
+
 const nodemailer = require("nodemailer");
 const emailsend = (email, otp) => {
   var transporter = nodemailer.createTransport({
@@ -54,6 +62,34 @@ const emailsend = (email, otp) => {
   });
 };
 
+const VerifyUserWhen = (email, name) => {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "devlanet19@gmail.com",
+      pass: "dszvqimsietyqdld",
+    },
+  });
+
+  var mailOptions = {
+    from: "devlanet19@gmail.com",
+    to: email,
+    subject: "Verify the User",
+    html: `<p>Dear ${name}</p>
+    <h1>Now, You are  ready to start College Alumni Portal.</h1>
+    <p>Thank you</p>`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
 module.exports = {
   emailsend,
+  VerifyUserWhen,
 };

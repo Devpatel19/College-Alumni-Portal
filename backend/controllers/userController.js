@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const { sendWelcomeEmail } = require("../emails/account");
+const { VerifyUserWhen } = require("../emails/account");
 const { emailsend } = require("../emails/account");
 const OtP = require("../models/otpModel");
 
@@ -37,6 +37,7 @@ const Login = async (req, res) => {
       throw new Error("please wait sometime admin can not verify it ");
     }
     const token = await user.generateAuthToken();
+
     res.status(200).send({
       _id: user._id,
       name: user.name,
@@ -123,6 +124,7 @@ const VerifyUser = async (req, res) => {
     const token = await user.generateAuthToken();
     user.token = token;
     await user.save();
+    VerifyUserWhen(user.email, user.name);
     res.json({
       _id: user._id,
       name: user.name,
