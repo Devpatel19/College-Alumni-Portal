@@ -8,6 +8,7 @@ const uploadImage = require("./router/uploadRouter");
 const applyDetail = require("./router/applyDetailRouter");
 const Common = require("./router/commonRouter");
 const dotenv = require("dotenv");
+const morgan = require("morgan");
 
 dotenv.config();
 const cors = require("cors");
@@ -16,6 +17,10 @@ require("./db/db");
 
 const app = express();
 const port = process.env.PORT;
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(cors());
 app.use(express.json());
