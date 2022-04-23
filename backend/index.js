@@ -18,9 +18,6 @@ require("./db/db");
 const app = express();
 const port = process.env.PORT;
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(cors());
 app.use(express.json());
@@ -37,3 +34,14 @@ app.get("/", (req, res) => res.send("Hello !!!"));
 app.listen(port, () => {
   console.log("server is up on Port " + port);
 });
+
+if (process.env.NODE_ENV === "development") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API Is Running...");
+  });
+}
