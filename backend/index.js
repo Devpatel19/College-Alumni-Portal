@@ -8,7 +8,6 @@ const uploadImage = require("./router/uploadRouter");
 const applyDetail = require("./router/applyDetailRouter");
 const Common = require("./router/commonRouter");
 const dotenv = require("dotenv");
-const morgan = require("morgan");
 
 dotenv.config();
 const cors = require("cors");
@@ -34,14 +33,3 @@ app.get("/", (req, res) => res.send("Hello !!!"));
 app.listen(port, () => {
   console.log("server is up on Port " + port);
 });
-
-if (process.env.NODE_ENV === "development") {
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("API Is Running...");
-  });
-}
