@@ -9,7 +9,7 @@ const AlumniScreen = () => {
       paddingTop: "57px",
     },
     contentMargin: {
-      marginLeft: "20px",
+      marginLeft: "10px",
       width: "100%",
       display: "flex",
       padding: "10px",

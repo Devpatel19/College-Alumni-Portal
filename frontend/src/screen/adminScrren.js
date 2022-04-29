@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SideNavigation from "../Components/sidenavigation";
+import { useSelector } from "react-redux";
 
 const AdminScrren = () => {
   const styles = {
@@ -18,9 +19,15 @@ const AdminScrren = () => {
     },
   };
   const navigate = useNavigate();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
-    navigate("/login/Admin/Dashboard");
+    if (userInfo) {
+      navigate("/login/Admin/Dashboard");
+    } else {
+      navigate("/HomeScreen/login");
+    }
   }, []);
 
   return (

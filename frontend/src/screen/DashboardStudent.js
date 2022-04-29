@@ -19,6 +19,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { dashboardDetail } from "../Actions/Dashboardaction";
 import Loader from "../Components/Loader";
 import { readalljobs } from "../Actions/JobAction";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import WorkIcon from "@mui/icons-material/Work";
 
 const DashboardStudent = () => {
   const dispatch = useDispatch();
@@ -82,7 +84,7 @@ const DashboardStudent = () => {
             >
               <Card sx={{ backgroundColor: "lightgoldenrodyellow" }}>
                 <CardContent>
-                  <SupervisorAccountIcon />
+                  <EventNoteIcon />
                   <Typography gutterBottom variant="h5" component="div">
                     Event
                   </Typography>
@@ -100,7 +102,7 @@ const DashboardStudent = () => {
             >
               <Card sx={{ backgroundColor: "lightpink" }}>
                 <CardContent>
-                  <SupervisorAccountIcon />
+                  <WorkIcon />
                   <Typography gutterBottom variant="h5" component="div">
                     Job
                   </Typography>
@@ -129,6 +131,8 @@ const DashboardStudent = () => {
               </Card>
             </Link>
           </Grid>
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={2}></Grid>
           <Grid item xs={12} sm={8}>
             <Card>
               <Chart

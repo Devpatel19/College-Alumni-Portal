@@ -15,7 +15,6 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import VerifiedIcon from "@mui/icons-material/Verified";
 
 const tableIcons = {

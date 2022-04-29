@@ -26,7 +26,7 @@ const JobListScreen = () => {
   }, [dispatch, userInfo, navigate]);
 
   return (
-    <div style={{ paddingTop: "20px" }}>
+    <div>
       {loading ? (
         <Loader />
       ) : (

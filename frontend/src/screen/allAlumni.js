@@ -36,7 +36,7 @@ const BasicTable = () => {
   const userList = useSelector((state) => state.userList);
   const { users } = userList;
 
-  const [datas, setData] = useState("");
+  const [datas, setData] = useState({});
   const [open, setOpen] = useState(false);
   const [deletes, setDelete] = useState(false);
 
@@ -52,13 +52,13 @@ const BasicTable = () => {
 
   const handleOpen = (rowData) => {
     setOpen(true);
-    setData(rowData.id);
+    setData(rowData);
   };
   const handleClose = () => setOpen(false);
   const handleDeleteopen = (rowData) => {
     setDelete(true);
 
-    setData(rowData.id);
+    setData(rowData);
   };
   const handleDeleteclose = () => setDelete(false);
 
@@ -89,8 +89,7 @@ const BasicTable = () => {
   const columns = [
     { title: "Name", field: "name" },
     { title: "Email", field: "email" },
-    { title: "Mobile No", field: "mobileNo", type: "numeric" },
-    { title: "Verify", field: "verify" },
+    { title: "Mobile No", field: "mobileNo" },
   ];
   return (
     <>
@@ -135,11 +134,15 @@ const BasicTable = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Are you sure ?
             </Typography>
+
+            <Typography id="modal-modal-title" color="blue">
+              you want to verify {datas.name}
+            </Typography>
             <Typography>
               <br />
               <Button
                 variant="contained"
-                onClick={() => aprrovalHandler(datas)}
+                onClick={() => aprrovalHandler(datas.id)}
               >
                 Yes
               </Button>{" "}
@@ -159,11 +162,18 @@ const BasicTable = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Are you sure ?
+              Are you sure ?,
+            </Typography>
+
+            <Typography id="modal-modal-title" color="red">
+              you want to Delete {datas.name}
             </Typography>
             <Typography>
               <br />
-              <Button variant="contained" onClick={() => deleteHandler(datas)}>
+              <Button
+                variant="contained"
+                onClick={() => deleteHandler(datas.id)}
+              >
                 Yes
               </Button>{" "}
               <Button

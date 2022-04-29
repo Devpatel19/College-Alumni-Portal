@@ -26,7 +26,7 @@ const BasicTable = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const [datas, setData] = useState("");
+  const [datas, setData] = useState({});
   const [open, setOpen] = useState(false);
   const [deletes, setDelete] = useState(false);
 
@@ -48,12 +48,12 @@ const BasicTable = () => {
 
   const handleOpen = (rowData) => {
     setOpen(true);
-    setData(rowData.id);
+    setData(rowData);
   };
   const handleClose = () => setOpen(false);
   const handleDeleteopen = (rowData) => {
     setDelete(true);
-    setData(rowData.id);
+    setData(rowData);
   };
   const handleDeleteclose = () => setDelete(false);
 
@@ -73,22 +73,23 @@ const BasicTable = () => {
   const data = [];
 
   users?.map((user) =>
-    data.push({
-      name: user.name,
-      email: user.email,
-      mobileNo: user.mobileNo,
-      type: user.type,
-      verify: user.verify,
-      id: user._id,
-    })
+    user.type !== "Admin"
+      ? data.push({
+          name: user.name,
+          email: user.email,
+          mobileNo: user.mobileNo,
+          type: user.type,
+          verify: user.verify,
+          id: user._id,
+        })
+      : ""
   );
 
   const columns = [
     { title: "Name", field: "name" },
     { title: "Email", field: "email" },
-    { title: "Mobile No", field: "mobileNo", type: "numeric" },
+    { title: "Mobile No", field: "mobileNo" },
     { title: "Type", field: "type" },
-    { title: "Verify", field: "verify" },
   ];
 
   return (
@@ -135,11 +136,15 @@ const BasicTable = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Are you sure ?
             </Typography>
+            <br />
+            <Typography id="modal-modal-title" color="blue">
+              you want to verify {datas.name}
+            </Typography>
             <Typography>
               <br />
               <Button
                 variant="contained"
-                onClick={() => aprrovalHandler(datas)}
+                onClick={() => aprrovalHandler(datas.id)}
               >
                 Yes
               </Button>{" "}
@@ -161,9 +166,17 @@ const BasicTable = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Are you sure ?
             </Typography>
+            <br />
+
+            <Typography id="modal-modal-title" color="red">
+              you want to Delete {datas.name}
+            </Typography>
             <Typography>
               <br />
-              <Button variant="contained" onClick={() => deleteHandler(datas)}>
+              <Button
+                variant="contained"
+                onClick={() => deleteHandler(datas.id)}
+              >
                 Yes
               </Button>{" "}
               <Button

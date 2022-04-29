@@ -4,8 +4,6 @@ import Modal from "@mui/material/Modal";
 import { useDispatch } from "react-redux";
 import { deleteevent } from "../Actions/EventAction";
 import Card from "@mui/material/Card";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -15,7 +13,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import { BASE_URL } from "../constants/baseurl";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import Collapse from "@mui/material/Collapse";
 import { NavLink } from "react-router-dom";
 const style = {
   position: "absolute",
@@ -28,16 +25,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 const Event = ({ eve }) => {
   const [open, setOpen] = useState(false);
@@ -112,26 +99,6 @@ const Event = ({ eve }) => {
             {!expanded ? "Read more" : "Read less"}
           </p>
         </NavLink>
-
-        {/* <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {!expanded ? "Read more" : "Read less"}
-        </ExpandMore> */}
-
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <div style={{ display: "flex", marginTop: "5px" }}>
-              <InfoIcon />
-              <Typography variant="body2" sx={{ marginLeft: "10px" }}>
-                {eve.Description}
-              </Typography>
-            </div>
-          </CardContent>
-        </Collapse> */}
       </Card>
       <div>
         <Modal

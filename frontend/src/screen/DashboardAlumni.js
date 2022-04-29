@@ -107,6 +107,8 @@ const DashboardAlumni = () => {
               </Card>
             </Link>
           </Grid>
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={2}></Grid>
           <Grid item xs={12} sm={8}>
             <Card>
               <Chart
