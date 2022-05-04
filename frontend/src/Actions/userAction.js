@@ -73,7 +73,7 @@ export const login = (values) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.response.data,
+      payload: error.response,
     });
   }
 };
