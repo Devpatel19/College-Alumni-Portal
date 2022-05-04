@@ -4,7 +4,6 @@ import {
   USER_DASHBOARD_REQUEST,
   USER_DASHBOARD_SUCCESS,
 } from "../constants/dashboardConstant";
-import baseService from "../services/baseService";
 
 export const dashboardDetail = () => async (dispatch, getState) => {
   try {

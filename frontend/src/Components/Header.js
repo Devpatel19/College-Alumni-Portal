@@ -112,7 +112,7 @@ const Navbar = () => {
                     <Tooltip title="Open settings">
                       <IconButton onClick={handleOpenUserMenu}>
                         {ProfileInfo?.Image ? (
-                          <Avatar src={`${BASE_URL}/${ProfileInfo?.Image}`} />
+                          <Avatar src={`/${ProfileInfo?.Image}`} />
                         ) : (
                           <Avatar sx={{ bgcolor: "orange" }}>
                             {userInfo?.name.split(" ")[0].slice(0, 1)}{" "}
