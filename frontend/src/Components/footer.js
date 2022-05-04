@@ -9,7 +9,7 @@ export default function Footer() {
     <footer style={{ width: "100%", bottom: 0, height: "100px" }}>
       <Box
         px={{ xs: 3, sm: 10 }}
-        py={{ xs: 3, sm: 7 }}
+        py={{ xs: 3, sm: 10 }}
         bgcolor="#236c7e"
         color="white"
         fontSize="18px"
