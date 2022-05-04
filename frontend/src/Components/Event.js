@@ -60,7 +60,7 @@ const Event = ({ eve }) => {
         <CardMedia
           component="img"
           height="140"
-          image={`${BASE_URL}/${eve.ImageLocation}`}
+          image={`/${eve.ImageLocation}`}
           alt="green iguana"
         />
         <CardContent>

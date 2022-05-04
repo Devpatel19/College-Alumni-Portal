@@ -119,7 +119,7 @@ const ProfileScreen = () => {
 
                       backgroundSize: "cover",
                     }}
-                    src={`${BASE_URL}/${ProfileInfo?.Image}`}
+                    src={`/${ProfileInfo?.Image}`}
                   />
                 )}
               </Col>
