@@ -32,10 +32,12 @@ app.get("/", (req, res) => res.send("Hello !!!"));
 
 if (process.env.NODE_ENV === "production") {
   console.log("here");
-  const lik = path.join(__dirname, "../frontend");
+  const lik = path.join(__dirname, "../frontend/build");
+  const dsada = path.resolve(lik, "..", "index.html");
   app.use(express.static("build"));
+  console.log(dsada);
   app.get("*", (req, res) =>
-    req.sendfile(path.resolve(lik, "build", "index.html"))
+    req.sendfile(path.resolve(lik, "..", "index.html"))
   );
 }
 
