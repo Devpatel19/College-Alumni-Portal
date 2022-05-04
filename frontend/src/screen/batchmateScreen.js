@@ -56,7 +56,7 @@ const Batchmates = () => {
                 }}
               >
                 <Avatar
-                  src={`${BASE_URL}/${profile.Image}`}
+                  src={`/${profile.Image}`}
                   sx={{ width: 150, height: 150, alignSelf: "center" }}
                 ></Avatar>
                 <CardContent>
