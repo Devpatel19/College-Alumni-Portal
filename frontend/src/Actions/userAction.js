@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -24,7 +23,6 @@ import {
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
 } from "../constants/userconstant";
-import baseService from "../services/baseService";
 
 export const signup = (values) => async (dispatch) => {
   try {
@@ -36,7 +34,7 @@ export const signup = (values) => async (dispatch) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post("/users", values, config);
+    const { data } = await axios.post("/users", values, config);
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: data,
@@ -76,7 +74,7 @@ export const login = (values) => async (dispatch) => {
     console.log(error);
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.response,
+      payload: error.response.data,
     });
   }
 };
@@ -97,7 +95,7 @@ export const readalluser = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get("/users", config);
+    const { data } = await axios.get("/users", config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -130,7 +128,7 @@ export const Aprroval = (user) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.patch(
+    const { data } = await axios.patch(
       `/user/verify/${user._id}`,
       user,
       config
@@ -170,11 +168,7 @@ export const resetPassword = (Email) => async (dispatch) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post(
-      "/users/forgotpassword",
-      values,
-      config
-    );
+    const { data } = await axios.post("/users/forgotpassword", values, config);
     dispatch({
       type: USER_PASSWORD_REST_SUCCESS,
       payload: data,
@@ -199,11 +193,7 @@ export const changePasswords = (news) => async (dispatch) => {
       },
     };
 
-    const { data } = await baseService.patch(
-      "/user/passwordchange",
-      news,
-      config
-    );
+    const { data } = await axios.patch("/user/passwordchange", news, config);
 
     dispatch({
       type: USER_PASSWORD_CHANGE_SUCCESS,
@@ -234,7 +224,7 @@ export const deleteuser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await baseService.delete(`/user/delete/${id}`, config);
+    await axios.delete(`/user/delete/${id}`, config);
 
     dispatch({
       type: USER_DELETE_SUCCESS,

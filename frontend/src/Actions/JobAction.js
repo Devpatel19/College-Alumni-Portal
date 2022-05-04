@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   JOB_DELETE_FAIL,
   JOB_DELETE_REQUEST,
@@ -15,7 +16,6 @@ import {
   JOB_UPDATE_REQUEST,
   JOB_UPDATE_SUCCESS,
 } from "../constants/jobConstant";
-import baseService from "../services/baseService";
 
 export const jobPost = (values) => async (dispatch, getState) => {
   try {
@@ -32,7 +32,7 @@ export const jobPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post("/job", values, config);
+    const { data } = await axios.post("/job", values, config);
 
     dispatch({
       type: JOB_POST_SUCCESS,
@@ -62,7 +62,7 @@ export const readalljobs = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get("/jobs", config);
+    const { data } = await axios.get("/jobs", config);
 
     dispatch({
       type: JOB_GET_SUCCESS,
@@ -95,7 +95,7 @@ export const readJob = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get(`/jobs/${userInfo._id}`, config);
+    const { data } = await axios.get(`/jobs/${userInfo._id}`, config);
 
     dispatch({
       type: JOB_GET_OWNER_SUCCESS,
@@ -128,7 +128,7 @@ export const deletejob = (id) => async (dispatch, getState) => {
       },
     };
 
-    await baseService.delete(`/jobs/${id}`, config);
+    await axios.delete(`/jobs/${id}`, config);
 
     dispatch({
       type: JOB_DELETE_SUCCESS,
@@ -161,7 +161,7 @@ export const updateJob = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await baseService.patch(`/jobs/${user._id}`, user, config);
+    const { data } = await axios.patch(`/jobs/${user._id}`, user, config);
 
     dispatch({
       type: JOB_UPDATE_SUCCESS,

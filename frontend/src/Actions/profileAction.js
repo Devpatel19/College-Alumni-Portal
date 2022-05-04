@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   PROFILE_GET_ALL_FAIL,
   PROFILE_GET_ALL_REQUEST,
@@ -12,7 +13,7 @@ import {
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_SUCCESS,
 } from "../constants/profieConstant";
-import baseServics from "../services/baseService";
+
 export const profilesPost = (values) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -28,7 +29,7 @@ export const profilesPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseServics.post("/profile", values, config);
+    const { data } = await axios.post("/profile", values, config);
 
     dispatch({
       type: PROFILE_POST_SUCCESS,
@@ -56,7 +57,7 @@ export const profilesRead = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseServics.get(`/profile/${userInfo._id}`, config);
+    const { data } = await axios.get(`/profile/${userInfo._id}`, config);
     dispatch({
       type: PROFILE_GET_SUCCESS,
       payload: data,
@@ -84,7 +85,7 @@ export const Updateprofile = (user) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseServics.patch(
+    const { data } = await axios.patch(
       `/profile/${userInfo._id}`,
       user,
       config
@@ -118,7 +119,7 @@ export const allprofilesRead = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseServics.get(`/profiles`, config);
+    const { data } = await axios.get(`/profiles`, config);
     dispatch({
       type: PROFILE_GET_ALL_SUCCESS,
       payload: data,

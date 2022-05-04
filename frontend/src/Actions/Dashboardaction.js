@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   USER_DASHBOARD_FAIL,
   USER_DASHBOARD_REQUEST,
@@ -21,7 +22,7 @@ export const dashboardDetail = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get(`/length`, config);
+    const { data } = await axios.get(`/length`, config);
     dispatch({
       type: USER_DASHBOARD_SUCCESS,
       payload: data,

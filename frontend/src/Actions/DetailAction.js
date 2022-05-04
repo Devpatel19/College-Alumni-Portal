@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   DETAIL_GET_APPLY_FAIL,
   DETAIL_GET_APPLY_REQUEST,
@@ -9,7 +10,6 @@ import {
   DETAIL_POST_REQUEST,
   DETAIL_POST_SUCCESS,
 } from "../constants/DetailConstant";
-import baseService from "../services/baseService";
 
 export const DetailsPost = (values) => async (dispatch, getState) => {
   try {
@@ -25,7 +25,7 @@ export const DetailsPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post("/applyDetail", values, config);
+    const { data } = await axios.post("/applyDetail", values, config);
     dispatch({
       type: DETAIL_POST_SUCCESS,
       payload: data,
@@ -54,7 +54,7 @@ export const readdetail = (Id) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get(`/applyDetail/${Id}`, config);
+    const { data } = await axios.get(`/applyDetail/${Id}`, config);
 
     dispatch({
       type: DETAIL_GET_SUCCESS,
@@ -87,7 +87,7 @@ export const ReadJobApply = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get(`/applyDetail/student`, config);
+    const { data } = await axios.get(`/applyDetail/student`, config);
 
     const values = data.filter((d) => d.Email === userInfo.email);
 

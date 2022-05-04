@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   EVENT_DELETE_FAIL,
   EVENT_DELETE_REQUEST,
@@ -12,7 +13,6 @@ import {
   EVENT_UPDATE_REQUEST,
   EVENT_UPDATE_SUCCESS,
 } from "../constants/eventConstant";
-import baseService from "../services/baseService";
 
 export const eventPost = (values) => async (dispatch, getState) => {
   try {
@@ -29,7 +29,7 @@ export const eventPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post("/event", values, config);
+    const { data } = await axios.post("/event", values, config);
 
     dispatch({
       type: EVENT_POST_SUCCESS,
@@ -59,7 +59,7 @@ export const readallevents = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.get("/event", config);
+    const { data } = await axios.get("/event", config);
 
     dispatch({
       type: EVENT_GET_SUCCESS,
@@ -92,11 +92,7 @@ export const updateEvent = (user) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.patch(
-      `/event/${user._id}`,
-      user,
-      config
-    );
+    const { data } = await axios.patch(`/event/${user._id}`, user, config);
 
     dispatch({
       type: EVENT_UPDATE_SUCCESS,
@@ -129,7 +125,7 @@ export const deleteevent = (id) => async (dispatch, getState) => {
       },
     };
 
-    await baseService.delete(`/event/${id}`, config);
+    await axios.delete(`/event/${id}`, config);
 
     dispatch({
       type: EVENT_DELETE_SUCCESS,
