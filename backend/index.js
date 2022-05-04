@@ -28,17 +28,19 @@ app.use(profileRouter);
 app.use(uploadImage);
 app.use(applyDetail);
 
-app.get("/", (req, res) => res.send("Hello !!!"));
+// const lik = path.join(__dirname, "../frontend");
+// const dsada = path.resolve(lik, "build", "index.html");
+// // app.use(express.static("build"));
+// console.log(dsada);
 
 if (process.env.NODE_ENV === "production") {
   console.log("here");
   const lik = path.join(__dirname, "../frontend/build");
-  const dsada = path.resolve(lik, "..", "index.html");
-  app.use(express.static("build"));
-  console.log(dsada);
-  app.get("*", (req, res) =>
-    req.sendfile(path.resolve(lik, "..", "index.html"))
-  );
+  //const dsada = path.resolve(lik, "build", "index.html");
+  app.use(express.static(lik));
+  app.get("*", (req, res) => res.sendFile(path.resolve(lik, "index.html")));
+} else {
+  app.get("/", (req, res) => res.send("Hello !!!"));
 }
 
 app.listen(port, () => {
