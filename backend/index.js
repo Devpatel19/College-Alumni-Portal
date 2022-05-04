@@ -34,10 +34,11 @@ if (process.env.NODE_ENV === "production") {
   console.log("here");
   const lik = path.join(__dirname, "../frontend");
   app.use(express.static("build"));
-  app.get("*", (req, res) => {
-    res.send("frontend");
+  app.get(
+    "*",
+    (req, res) => res.send("frontend")
     //req.sendFile(path.resolve(lik, "build", "index.html"));
-  });
+  );
 }
 
 app.listen(port, () => {
