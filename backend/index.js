@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "production") {
   const lik = path.join(__dirname, "../frontend");
   app.use(express.static("build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(lik, "build", "index.html"));
+    req.sendFile(path.resolve(lik, "build", "index.html"));
   });
 }
 
