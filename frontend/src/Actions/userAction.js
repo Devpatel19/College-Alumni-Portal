@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -64,7 +66,7 @@ export const login = (values) => async (dispatch) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await baseService.post("/users/login", values, config);
+    const { data } = await axios.post("/users/login", values, config);
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
