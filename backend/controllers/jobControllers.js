@@ -12,7 +12,12 @@ const JobPost = async (req, res) => {
 
 const readallJob = async (req, res) => {
   try {
-    const jobs = await Job.find({});
+    const jobtotal = await Job.find({});
+    TotalJob = jobtotal.length;
+    const jobs = await Job.find({})
+      .limit(parseInt(req.query.limit))
+      .skip(parseInt(req.query.skip))
+      .sort({ createdAt: -1 });
     res.status(200).send(jobs);
   } catch (e) {
     res.status(500).send(e);

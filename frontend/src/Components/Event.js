@@ -10,9 +10,6 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
 import InfoIcon from "@mui/icons-material/Info";
-import { BASE_URL } from "../constants/baseurl";
-import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import { NavLink } from "react-router-dom";
 const style = {
   position: "absolute",
@@ -45,7 +42,8 @@ const Event = ({ eve }) => {
     <div>
       <Card
         sx={{
-          maxWidth: 400,
+          maxWidth: 450,
+          minwidth: 100,
           // maxHeight: 410,
           minheight: 300,
           boxShadow: "5px 5px 10px grey",

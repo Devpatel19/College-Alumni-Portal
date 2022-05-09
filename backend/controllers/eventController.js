@@ -12,7 +12,7 @@ const EventPost = async (req, res) => {
 
 const ReadallEvent = async (req, res) => {
   try {
-    const events = await Event.find({});
+    const events = await Event.find({}).sort({ createdAt: -1 });
     res.status(200).send(events);
   } catch (e) {
     res.status(404).send();

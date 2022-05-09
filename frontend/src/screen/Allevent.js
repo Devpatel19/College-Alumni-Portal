@@ -39,7 +39,7 @@ const EventListScreen = () => {
       ) : (
         <Grid container spacing={2}>
           {events?.map((eve) => (
-            <Grid key={eve._id} item xs={12} sm={4}>
+            <Grid key={eve._id} item xs="auto">
               <br />
               <Event eve={eve} />
             </Grid>

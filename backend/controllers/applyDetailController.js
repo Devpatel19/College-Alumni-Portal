@@ -10,7 +10,8 @@ const ApplyDetailPost = async (req, res) => {
   }
 };
 const ApplyDetailRead = async (req, res) => {
-  const detail = await ApplyDetail.find({}).populate("Job");
+  const ids = req.params.id;
+  const detail = await ApplyDetail.find({ owner: ids }).populate("Job");
   try {
     res.status(200).send(detail);
   } catch (e) {

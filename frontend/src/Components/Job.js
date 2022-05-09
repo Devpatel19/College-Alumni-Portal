@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -15,21 +15,21 @@ import {
   Form,
 } from "reactstrap";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 const Job = ({ job }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
   const [values, setValues] = useState({
     Name: userInfo.name,
     Email: userInfo.email,
     MobileNo: userInfo.mobileNo,
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -42,16 +42,18 @@ const Job = ({ job }) => {
     e.preventDefault();
     const Id = job._id;
     values["Job"] = Id;
+    values["owner"] = userInfo._id;
     dispatch(DetailsPost(values));
     toggle();
+    navigate("/login/Student/myApplyjob");
   };
   return (
     <div>
       <Card
         onClick={toggle}
         sx={{
-          width: "90%",
-          height: "100%",
+          width: 300,
+          height: 400,
           marginLeft: "30px",
           borderRadius: "20px",
           boxShadow: "5px 5px 10px grey",
@@ -80,11 +82,7 @@ const Job = ({ job }) => {
         </Button>
         <CardActionArea>
           <CardContent sx={{ textAlign: "center" }}>
-            <Typography
-              variant="h4"
-              component="div"
-              sx={{ marginBottom: "20px" }}
-            >
+            <Typography variant="h4" sx={{ marginBottom: "20px" }}>
               <b>{job.Role.toUpperCase()}</b>
             </Typography>
             <Typography variant="body2" sx={{ fontSize: "19px" }}>

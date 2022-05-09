@@ -55,7 +55,7 @@ const Login = async (req, res) => {
 
 const Alluser = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).sort({ createdAt: -1 });
     res.status(200).send(users);
   } catch (err) {
     res.send(400).send(e);

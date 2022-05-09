@@ -6,6 +6,9 @@ import {
   JOB_GET_OWNER_FAIL,
   JOB_GET_OWNER_REQUEST,
   JOB_GET_OWNER_SUCCESS,
+  JOB_GET_Page_FAIL,
+  JOB_GET_Page_REQUEST,
+  JOB_GET_Page_SUCCESS,
   JOB_GET_REQUEST,
   JOB_GET_SUCCESS,
   JOB_POST_FAIL,
@@ -36,6 +39,19 @@ export const jobListReducer = (state = { jobs: [] }, action) => {
     case JOB_GET_SUCCESS:
       return { loading: false, jobs: action.payload };
     case JOB_GET_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const jobListReducerPage = (state = { jobpage: [] }, action) => {
+  switch (action.type) {
+    case JOB_GET_Page_REQUEST:
+      return { loading: true };
+    case JOB_GET_Page_SUCCESS:
+      return { loading: false, jobpage: action.payload };
+    case JOB_GET_Page_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

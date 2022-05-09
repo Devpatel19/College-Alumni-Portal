@@ -14,6 +14,7 @@ import {
 import {
   jobDeleteReducer,
   jobListReducer,
+  jobListReducerPage,
   jobPostReducer,
   jobReadReducer,
   jobUpdateReducer,
@@ -66,6 +67,7 @@ const reducer = combineReducers({
   ChangePassword: userchangepassword,
   DashboardDetail: DashboardReducer,
   DeleteUser: userDeleteReducer,
+  JobPage: jobListReducerPage,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

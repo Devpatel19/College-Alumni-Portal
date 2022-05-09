@@ -71,7 +71,7 @@ export const readdetail = (Id) => async (dispatch, getState) => {
   }
 };
 
-export const ReadJobApply = () => async (dispatch, getState) => {
+export const ReadJobApply = (Id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: DETAIL_GET_APPLY_REQUEST,
@@ -87,13 +87,13 @@ export const ReadJobApply = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/applyDetail/student`, config);
+    const { data } = await axios.get(`/applyDetail/student/${Id}`, config);
 
-    const values = data.filter((d) => d.Email === userInfo.email);
+    // const values = data.filter((d) => d.Email === userInfo.email);
 
     dispatch({
       type: DETAIL_GET_APPLY_SUCCESS,
-      payload: values,
+      payload: data,
     });
   } catch (error) {
     dispatch({

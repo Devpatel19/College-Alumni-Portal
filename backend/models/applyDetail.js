@@ -1,40 +1,42 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-
-const applyDetailSchema = new mongoose.Schema({
+const applyDetailSchema = new mongoose.Schema(
+  {
     Name: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
     Email: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
     },
     MobileNo: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
     Job: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Job'
-    }
-}, {
-    timestamps: true
-})
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Job",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
+const ApplyDetail = mongoose.model("ApplyDetail", applyDetailSchema);
 
-
-
-
-const ApplyDetail = mongoose.model('ApplyDetail', applyDetailSchema)
-
-module.exports = ApplyDetail
-
+module.exports = ApplyDetail;

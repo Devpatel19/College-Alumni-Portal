@@ -7,6 +7,9 @@ import {
   JOB_GET_OWNER_FAIL,
   JOB_GET_OWNER_REQUEST,
   JOB_GET_OWNER_SUCCESS,
+  JOB_GET_Page_FAIL,
+  JOB_GET_Page_REQUEST,
+  JOB_GET_Page_SUCCESS,
   JOB_GET_REQUEST,
   JOB_GET_SUCCESS,
   JOB_POST_FAIL,
@@ -62,7 +65,7 @@ export const readalljobs = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get("/jobs", config);
+    const { data } = await axios.get(`/jobs`, config);
 
     dispatch({
       type: JOB_GET_SUCCESS,
@@ -71,6 +74,39 @@ export const readalljobs = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: JOB_GET_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const readalljobsPage = (skip) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: JOB_GET_Page_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        "content-type": "application/json",
+      },
+    };
+    const { data } = await axios.get(`/jobs?limit=4&skip=${skip}`, config);
+
+    dispatch({
+      type: JOB_GET_Page_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: JOB_GET_Page_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

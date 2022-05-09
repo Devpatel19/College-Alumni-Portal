@@ -14,10 +14,11 @@ const MyApplyJob = () => {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(ReadJobApply());
+      dispatch(ReadJobApply(userInfo._id));
     }
   }, [userInfo, dispatch]);
   const data = [];
+  console.log(MyApplyJob);
   MyApplyJob?.map((myjob) =>
     data.push({
       CompanyName: myjob.Job.CompanyName,
