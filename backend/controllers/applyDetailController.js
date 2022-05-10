@@ -29,4 +29,24 @@ const readDetail = async (req, res) => {
   }
 };
 
-module.exports = { ApplyDetailPost, readDetail, ApplyDetailRead };
+const readDetailByApply = async (req, res) => {
+  const id = req.params.id;
+  const detail = await ApplyDetail.findOne({ Job: id, owner: req.user._id });
+
+  try {
+    if (!detail) {
+      res.status(200).send(false);
+    } else {
+      res.status(200).send(true);
+    }
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
+module.exports = {
+  ApplyDetailPost,
+  readDetail,
+  ApplyDetailRead,
+  readDetailByApply,
+};

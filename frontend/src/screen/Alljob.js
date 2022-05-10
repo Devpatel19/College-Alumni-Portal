@@ -41,14 +41,14 @@ const JobListScreen = () => {
     data.push(myjob.Job._id);
   });
 
-  const datas = jobpage?.filter((job) => !data.includes(job._id));
+  // const datas = jobpage?.filter((job) => !data.includes(job._id));
 
   const handletry = (event, page) => {
     //console.log(value);
     setPage(page);
-    dispatch(readalljobsPage(5 * (page - 1)));
+    dispatch(readalljobsPage(4 * (page - 1)));
 
-    setSkip(5 * (page - 1));
+    setSkip(4 * (page - 1));
   };
 
   return (
@@ -58,7 +58,7 @@ const JobListScreen = () => {
       ) : (
         <>
           <Grid container spacing={2}>
-            {datas?.map((job) => (
+            {jobpage?.map((job) => (
               <Grid item sm="auto" key={job._id}>
                 <br />
                 <Job job={job} />

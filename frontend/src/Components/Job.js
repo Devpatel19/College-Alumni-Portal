@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { DetailsPost } from "../Actions/DetailAction";
+import { DetailsPost, ReadJobapplyuser } from "../Actions/DetailAction";
 import {
   Modal,
   ModalBody,
@@ -18,6 +18,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 const Job = ({ job }) => {
   const [modal, setModal] = useState(false);
+  const [apply, setApply] = useState(false);
   const toggle = () => setModal(!modal);
 
   const dispatch = useDispatch();
@@ -30,6 +31,19 @@ const Job = ({ job }) => {
     Email: userInfo.email,
     MobileNo: userInfo.mobileNo,
   });
+
+  const ApplyUser = useSelector((state) => state.ApplyUser);
+  const { applyJob } = ApplyUser;
+
+  useEffect(() => {
+    dispatch(ReadJobapplyuser(job._id));
+  }, []);
+
+  useEffect(() => {
+    if (applyJob) {
+      setApply(true);
+    }
+  }, [applyJob]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -37,7 +51,6 @@ const Job = ({ job }) => {
       [name]: value,
     });
   };
-
   const applyHandler = (e) => {
     e.preventDefault();
     const Id = job._id;
@@ -50,10 +63,10 @@ const Job = ({ job }) => {
   return (
     <div>
       <Card
-        onClick={toggle}
+        // onClick={toggle}
         sx={{
           width: 300,
-          height: 400,
+          height: 375,
           marginLeft: "30px",
           borderRadius: "20px",
           boxShadow: "5px 5px 10px grey",
@@ -66,20 +79,38 @@ const Job = ({ job }) => {
           },
         }}
       >
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          onClick={toggle}
-          sx={{
-            padding: 0,
-            height: "55px",
-            fontSize: "25px",
-            textTransform: "capitalize",
-          }}
-        >
-          {`Apply Now`.toLowerCase()}
-        </Button>
+        {!apply ? (
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            onClick={toggle}
+            sx={{
+              padding: 0,
+              height: "55px",
+              fontSize: "25px",
+              textTransform: "capitalize",
+            }}
+          >
+            {`Apply Now`.toLowerCase()}
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              cursor: "not-allowed !important",
+              padding: 0,
+              height: "55px",
+              fontSize: "25px",
+              textTransform: "capitalize",
+            }}
+          >
+            {`Already Apply`.toLowerCase()}
+          </Button>
+        )}
+
         <CardActionArea>
           <CardContent sx={{ textAlign: "center" }}>
             <Typography variant="h4" sx={{ marginBottom: "20px" }}>

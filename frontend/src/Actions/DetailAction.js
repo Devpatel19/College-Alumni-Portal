@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  DETAIL_APPLY_USER_FAIL,
+  DETAIL_APPLY_USER_REQUEST,
+  DETAIL_APPLY_USER_SUCCESS,
   DETAIL_GET_APPLY_FAIL,
   DETAIL_GET_APPLY_REQUEST,
   DETAIL_GET_APPLY_SUCCESS,
@@ -98,6 +101,41 @@ export const ReadJobApply = (Id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: DETAIL_GET_APPLY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const ReadJobapplyuser = (Id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: DETAIL_APPLY_USER_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        "content-type": "application/json",
+      },
+    };
+    const { data } = await axios.get(`/applyDetail/user/${Id}`, config);
+
+    // const values = data.filter((d) => d.Email === userInfo.email);
+
+    dispatch({
+      type: DETAIL_APPLY_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DETAIL_APPLY_USER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

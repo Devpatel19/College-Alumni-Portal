@@ -38,6 +38,7 @@ import {
   DetailPostReducer,
   DetailReadReducer,
   DetailApplyReducer,
+  Jobapplyuser,
 } from "../reducers/detailReducer";
 import { DashboardReducer } from "../reducers/DashboardReducer";
 import { uploadReducer } from "../reducers/uploadReducer";
@@ -68,6 +69,7 @@ const reducer = combineReducers({
   DashboardDetail: DashboardReducer,
   DeleteUser: userDeleteReducer,
   JobPage: jobListReducerPage,
+  ApplyUser: Jobapplyuser,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

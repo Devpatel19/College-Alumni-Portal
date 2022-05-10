@@ -1,4 +1,7 @@
 import {
+  DETAIL_APPLY_USER_FAIL,
+  DETAIL_APPLY_USER_REQUEST,
+  DETAIL_APPLY_USER_SUCCESS,
   DETAIL_GET_APPLY_FAIL,
   DETAIL_GET_APPLY_REQUEST,
   DETAIL_GET_APPLY_SUCCESS,
@@ -43,6 +46,19 @@ export const DetailApplyReducer = (state = { MyApplyJob: [] }, action) => {
     case DETAIL_GET_APPLY_SUCCESS:
       return { loading: false, MyApplyJob: action.payload };
     case DETAIL_GET_APPLY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const Jobapplyuser = (state = {}, action) => {
+  switch (action.type) {
+    case DETAIL_APPLY_USER_REQUEST:
+      return { loading: true };
+    case DETAIL_APPLY_USER_SUCCESS:
+      return { loading: false, applyJob: action.payload };
+    case DETAIL_APPLY_USER_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
