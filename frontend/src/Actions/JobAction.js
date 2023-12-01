@@ -19,7 +19,6 @@ import {
   JOB_UPDATE_REQUEST,
   JOB_UPDATE_SUCCESS,
 } from "../constants/jobConstant";
-import { NODE_URL } from "../constants/backendURL";
 
 export const jobPost = (values) => async (dispatch, getState) => {
   try {
@@ -36,7 +35,7 @@ export const jobPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.post(`${NODE_URL}/job`, values, config);
+    const { data } = await axios.post(`/job`, values, config);
 
     dispatch({
       type: JOB_POST_SUCCESS,
@@ -66,7 +65,7 @@ export const readalljobs = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`${NODE_URL}/jobs`, config);
+    const { data } = await axios.get(`/jobs`, config);
 
     dispatch({
       type: JOB_GET_SUCCESS,
@@ -99,7 +98,7 @@ export const readalljobsPage = (skip) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`${NODE_URL}/jobs?limit=4&skip=${skip}`, config);
+    const { data } = await axios.get(`/jobs?limit=4&skip=${skip}`, config);
 
     dispatch({
       type: JOB_GET_Page_SUCCESS,
@@ -132,7 +131,7 @@ export const readJob = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`${NODE_URL}/jobs/${userInfo._id}`, config);
+    const { data } = await axios.get(`/jobs/${userInfo._id}`, config);
 
     dispatch({
       type: JOB_GET_OWNER_SUCCESS,
@@ -165,7 +164,7 @@ export const deletejob = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`${NODE_URL}/jobs/${id}`, config);
+    await axios.delete(`/jobs/${id}`, config);
 
     dispatch({
       type: JOB_DELETE_SUCCESS,
@@ -198,7 +197,7 @@ export const updateJob = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.patch(`${NODE_URL}/jobs/${user._id}`, user, config);
+    const { data } = await axios.patch(`/jobs/${user._id}`, user, config);
 
     dispatch({
       type: JOB_UPDATE_SUCCESS,

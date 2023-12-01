@@ -1,1 +1,0 @@
-export const NODE_URL = 'https://college-alumni-portal-backend.onrender.com'

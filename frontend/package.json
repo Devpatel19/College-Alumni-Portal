@@ -29,11 +29,11 @@
     "fa-check": "^1.0.1",
     "fas": "^0.3.6",
     "font-awesome": "^4.7.0",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-apexcharts": "^1.4.0",
     "react-chartjs-2": "^4.1.0",
     "react-date-picker": "^8.4.0",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-otp-input": "^2.4.0",
@@ -51,7 +51,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts  start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -73,5 +73,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
