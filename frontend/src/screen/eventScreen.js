@@ -34,7 +34,7 @@ const EventScreen = () => {
 
   useEffect(() => {
     if (event) {
-      navigate("/login/Admin/allevents");
+      navigate("/login/Admin/manageevent");
     }
   }, [event, navigate]);
 

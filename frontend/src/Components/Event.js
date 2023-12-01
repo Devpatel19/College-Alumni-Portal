@@ -48,7 +48,6 @@ const Event = ({ eve }) => {
           minheight: 300,
           boxShadow: "5px 5px 10px grey",
           transition: "all 0.5s ease",
-          backgroundColor: "InactiveBorder",
           // display: "",
           "&:hover": {
             transform: "scale(1.05)",

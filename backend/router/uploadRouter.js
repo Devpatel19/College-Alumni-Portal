@@ -6,7 +6,7 @@ const Event = require("../models/eventModel");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "uploads/imgs/");
+    cb(null, "../uploads/imgs/");
   },
   filename(req, file, cb) {
     cb(null, `${file.originalname}`);
