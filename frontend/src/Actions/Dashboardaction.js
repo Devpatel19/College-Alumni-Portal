@@ -4,6 +4,7 @@ import {
   USER_DASHBOARD_REQUEST,
   USER_DASHBOARD_SUCCESS,
 } from "../constants/dashboardConstant";
+import { NODE_URL } from "../constants/backendURL";
 
 export const dashboardDetail = () => async (dispatch, getState) => {
   try {
@@ -21,7 +22,7 @@ export const dashboardDetail = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/length`, config);
+    const { data } = await axios.get(`${NODE_URL}/length`, config);
     dispatch({
       type: USER_DASHBOARD_SUCCESS,
       payload: data,

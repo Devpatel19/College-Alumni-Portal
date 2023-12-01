@@ -13,6 +13,7 @@ import {
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_SUCCESS,
 } from "../constants/profieConstant";
+import { NODE_URL } from "../constants/backendURL";
 
 export const profilesPost = (values) => async (dispatch, getState) => {
   try {
@@ -29,7 +30,7 @@ export const profilesPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.post("/profile", values, config);
+    const { data } = await axios.post(`${NODE_URL}/profile`, values, config);
 
     dispatch({
       type: PROFILE_POST_SUCCESS,
@@ -57,7 +58,7 @@ export const profilesRead = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/profile/${userInfo._id}`, config);
+    const { data } = await axios.get(`${NODE_URL}/profile/${userInfo._id}`, config);
     dispatch({
       type: PROFILE_GET_SUCCESS,
       payload: data,
@@ -86,7 +87,7 @@ export const Updateprofile = (user) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.patch(
-      `/profile/${userInfo._id}`,
+      `${NODE_URL}/profile/${userInfo._id}`,
       user,
       config
     );
@@ -119,7 +120,7 @@ export const allprofilesRead = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/profiles`, config);
+    const { data } = await axios.get(`${NODE_URL}/profiles`, config);
     dispatch({
       type: PROFILE_GET_ALL_SUCCESS,
       payload: data,

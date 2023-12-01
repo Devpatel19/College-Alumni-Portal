@@ -13,6 +13,7 @@ import {
   DETAIL_POST_REQUEST,
   DETAIL_POST_SUCCESS,
 } from "../constants/DetailConstant";
+import { NODE_URL } from "../constants/backendURL";
 
 export const DetailsPost = (values) => async (dispatch, getState) => {
   try {
@@ -28,7 +29,7 @@ export const DetailsPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.post("/applyDetail", values, config);
+    const { data } = await axios.post(`${NODE_URL}/applyDetail`, values, config);
     dispatch({
       type: DETAIL_POST_SUCCESS,
       payload: data,
@@ -57,7 +58,7 @@ export const readdetail = (Id) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/applyDetail/${Id}`, config);
+    const { data } = await axios.get(`${NODE_URL}/applyDetail/${Id}`, config);
 
     dispatch({
       type: DETAIL_GET_SUCCESS,
@@ -90,7 +91,7 @@ export const ReadJobApply = (Id) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/applyDetail/student/${Id}`, config);
+    const { data } = await axios.get(`${NODE_URL}/applyDetail/student/${Id}`, config);
 
     // const values = data.filter((d) => d.Email === userInfo.email);
 
@@ -125,7 +126,7 @@ export const ReadJobapplyuser = (Id) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get(`/applyDetail/user/${Id}`, config);
+    const { data } = await axios.get(`${NODE_URL}/applyDetail/user/${Id}`, config);
 
     // const values = data.filter((d) => d.Email === userInfo.email);
 

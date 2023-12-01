@@ -13,6 +13,7 @@ import {
   EVENT_UPDATE_REQUEST,
   EVENT_UPDATE_SUCCESS,
 } from "../constants/eventConstant";
+import { NODE_URL } from "../constants/backendURL";
 
 export const eventPost = (values) => async (dispatch, getState) => {
   try {
@@ -29,7 +30,7 @@ export const eventPost = (values) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.post("/event", values, config);
+    const { data } = await axios.post(`${NODE_URL}/event`, values, config);
 
     dispatch({
       type: EVENT_POST_SUCCESS,
@@ -59,7 +60,7 @@ export const readallevents = () => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.get("/event", config);
+    const { data } = await axios.get(`${NODE_URL}/event`, config);
 
     dispatch({
       type: EVENT_GET_SUCCESS,
@@ -92,7 +93,7 @@ export const updateEvent = (user) => async (dispatch, getState) => {
         "content-type": "application/json",
       },
     };
-    const { data } = await axios.patch(`/event/${user._id}`, user, config);
+    const { data } = await axios.patch(`${NODE_URL}/event/${user._id}`, user, config);
 
     dispatch({
       type: EVENT_UPDATE_SUCCESS,
@@ -125,7 +126,7 @@ export const deleteevent = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/event/${id}`, config);
+    await axios.delete(`${NODE_URL}/event/${id}`, config);
 
     dispatch({
       type: EVENT_DELETE_SUCCESS,
